@@ -1,5 +1,3 @@
-
-
 var editorContent = "";
 var editorFile = "";
 
@@ -18,6 +16,7 @@ function loadFileContent(fileContent)
 
 // listeners for plugin events
 self.port.on('load-file-content', loadFileContent);
+
 
 // listeners for editor events
 var textArea = document.getElementById("content");

@@ -20,6 +20,10 @@
             {
                 "value": "raptor",
                 "label": "raptor"
+            },
+            {
+                "value": "ckeditor",
+                "label": "CKEditor"
             }
         ]
     }]
