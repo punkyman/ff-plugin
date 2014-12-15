@@ -3,9 +3,9 @@
 var editorContent = "";
 var editorFile = "";
 
-function writeEditorContent(content)
+function writeFileContent(content)
 {
-    console.log(content);
+    self.port.emit('save-file-content', content); 
 }
 
 function loadFileContent(fileContent)
@@ -22,7 +22,7 @@ self.port.on('load-file-content', loadFileContent);
 // listeners for editor events
 var textArea = document.getElementById("content");
 textArea.addEventListener('save-content', function onsavecontent(event) {
-    writeEditorContent(event.detail);
+    writeFileContent(event.detail);
   }, false);
 
 

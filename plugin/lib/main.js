@@ -31,6 +31,14 @@ function onEditorPrefChange(prefName) {
 }
 require("sdk/simple-prefs").on("editorName", onEditorPrefChange);
 
+function saveFile(content)
+{
+    var contentPath = contentUrl.substr(7);
+    var textWriter = fileIO.open(contentPath, "w");
+    textWriter.write(content);
+    textWriter.close();
+}
+
 function openFile(tab) {
     var fileUrl = tab.url;
     if(fileUrl != editorUrl)
@@ -50,6 +58,7 @@ function openFile(tab) {
             var textReader = fileIO.open(contentPath, "r");
             var fileContent = textReader.read();
             textReader.close();
+            editorWorker.port.on('save-file-content', saveFile);
             editorWorker.port.emit('load-file-content', fileContent);
         }
     }
