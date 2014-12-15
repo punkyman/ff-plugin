@@ -1,9 +1,9 @@
 {
   "name": "plugin",
   "title": "plugin",
-  "id": "jid1-loFrVWu1w1etjA",
-  "description": "a basic add-on",
-  "author": "",
+  "id": "html-editor",
+  "description": "a basic html editor",
+  "author": "punky",
   "license": "MPL 2.0",
   "version": "0.1",
   "preferences" :
