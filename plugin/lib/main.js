@@ -30,14 +30,12 @@ require("sdk/simple-prefs").on("editorName", onEditorPrefChange);
 
 function openFile(tab) {
     var fileName = tab.url;
-    tab.url = editorPage;
     console.log(fileName);
 }
 
 function attachScript(tab) {
   editorTab = tab;
   var worker = tab.attach({ contentScriptFile: data.url("editor-code.js") });
-  tab.pin();
   tab.on('load', openFile);
 
   tabs.removeListener('ready',attachScript);
