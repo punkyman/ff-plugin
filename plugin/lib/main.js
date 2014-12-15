@@ -4,9 +4,9 @@ var prefs = require("sdk/simple-prefs").prefs;
 var fileIO = require("sdk/io/file");
 
 var editorPage = editorPrefToPage(prefs.editorName);
-var editorPath = "";
+var editorUrl = "";
 var editorWorker;
-var contentFilename = "";
+var contentUrl = "";
 
 // Create a button in toolbar
 require("sdk/ui/button/action").ActionButton({
@@ -32,20 +32,21 @@ function onEditorPrefChange(prefName) {
 require("sdk/simple-prefs").on("editorName", onEditorPrefChange);
 
 function openFile(tab) {
-    var fileName = tab.url;
-    if(fileName != editorPath)
+    var fileUrl = tab.url;
+    if(fileUrl != editorUrl)
     {
         // tab has loaded an other page than the editor; save the file path, and reload the editor
-        contentFilename = fileName;
-        tab.url = editorPath;   
+        contentUrl = fileUrl;
+        tab.url = editorUrl;   
     }
     else
     {
+        // attach the editor plugin script in case of editor page loading
         editorWorker = tab.attach({ contentScriptFile: data.url("editor-code.js") });
-        if(contentFilename.length > 0)
+        if(contentUrl.length > 0)
         {
             // skip the beginning of url that contains file://
-            var contentPath = contentFilename.substr(7);
+            var contentPath = contentUrl.substr(7);
             var textReader = fileIO.open(contentPath, "r");
             var fileContent = textReader.read();
             textReader.close();
@@ -62,8 +63,8 @@ function attachLoadCallback(tab) {
 // show a new tab when the user clicks the button.
 function handleClick(state) {
     // open local page that embeds the editor
-    editorPath = data.url(editorPage);
-    tabs.open(editorPath);
+    editorUrl = data.url(editorPage);
+    tabs.open(editorUrl);
     // when tab is ready, attach plugin-specific code
     tabs.on('ready', attachLoadCallback);
         //worker.port.emit("drawBorder", "red");
