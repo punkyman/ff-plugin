@@ -1,13 +1,13 @@
-var editorText = "";
+var editorContent = "";
 
 // attach an event listener for save events
 var textArea = document.getElementById("content");
-textArea.addEventListener('save-text', function onsavetext(event) {
-    writeEditorText(event.detail);
+textArea.addEventListener('save-content', function onsavecontent(event) {
+    writeEditorContent(event.detail);
   }, false);
 
-function writeEditorText(text)
+function writeEditorContent(content)
 {
-    console.log(text);
+    console.log(content);
 }
 
