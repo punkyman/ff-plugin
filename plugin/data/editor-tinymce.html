@@ -21,7 +21,7 @@
 	        "save"
             ],
             save_enablewhendirty: true,
-            save_onsavecallback: function() {var event = new CustomEvent('save-content', { 'detail': tinymce.activeEditor.getContent() }); var textArea = document.getElementById("content"); textArea.dispatchEvent(event);},
+            save_onsavecallback: function() {var event = new CustomEvent('save-content', { 'detail': tinymce.activeEditor.getContent({format: 'raw'}) }); var textArea = document.getElementById("content"); textArea.dispatchEvent(event);},
             toolbar1: "insertfile save undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             toolbar2: "print preview media | forecolor backcolor emoticons",
             image_advtab: true,

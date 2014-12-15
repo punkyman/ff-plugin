@@ -8,6 +8,8 @@ var editorUrl = "";
 var editorWorker;
 var contentUrl = "";
 
+var fileHeader = "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><!-- <title>document</title> --></head><body>";
+var fileFooter = "</body></html>";
 // Create a button in toolbar
 require("sdk/ui/button/action").ActionButton({
   id: "show-panel",
@@ -35,7 +37,9 @@ function saveFile(content)
 {
     var contentPath = contentUrl.substr(7);
     var textWriter = fileIO.open(contentPath, "w");
+    textWriter.write(fileHeader);
     textWriter.write(content);
+    textWriter.write(fileFooter);
     textWriter.close();
 }
 
@@ -65,6 +69,7 @@ function openFile(tab) {
 }
 
 function attachLoadCallback(tab) {
+  // load happens after ready, this hack works
   tab.on('load', openFile);
   tabs.removeListener('ready',attachLoadCallback);
 }
