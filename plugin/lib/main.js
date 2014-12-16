@@ -1,34 +1,15 @@
 var data = require("sdk/self").data;
 var tabs = require("sdk/tabs");
-var prefs = require("sdk/simple-prefs").prefs;
 var fileIO = require("sdk/io/file");
 
 var editorScript = "editor-code.js";
-var editorPage = "";
-var editorName = prefs.editorName;
+var editorPage = "editor.html";
 var editorUrl = "";
 var editorWorker;
 var contentUrl = "";
 
 var fileHeader = "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><!-- <title>document</title> --></head><body>";
 var fileFooter = "</body></html>";
-
-function editorPrefToPageName(value)
-{
-    if(value == "tinymce")
-    {
-        return data.url("editor-tinymce.html");
-    }
-    else if(value == "ckeditor")
-    {
-        return data.url("editor-ckeditor.html");
-    }
-}
-
-function onEditorPrefChange(prefName) {
-    editorName = prefs.editorName;
-}
-require("sdk/simple-prefs").on("editorName", onEditorPrefChange);
 
 function saveFile(content)
 {
@@ -73,12 +54,10 @@ function attachLoadCallback(tab) {
 
 // Create a button in toolbar
 require("sdk/ui/button/action").ActionButton({
-  id: "show-panel",
-  label: "Show Panel",
+  id: "show-ckeditor",
+  label: "Show CKEditor",
   icon: {
-    "16": "./icon-16.png",
-    "32": "./icon-32.png",
-    "64": "./icon-64.png"
+    "16": "./icon.png"
   },
   onClick: handleClick
 });
@@ -86,7 +65,6 @@ require("sdk/ui/button/action").ActionButton({
 // show a new tab when the user clicks the button.
 function handleClick(state) {
     // open local page that embeds the editor
-    editorPage = editorPrefToPageName(editorName);
     editorUrl = data.url(editorPage);
     tabs.open(editorUrl);
     // when tab is ready, attach plugin-specific code

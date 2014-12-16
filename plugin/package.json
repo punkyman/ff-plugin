@@ -1,30 +1,9 @@
 {
   "name": "ckembedded",
-  "title": "plugin",
+  "title": "ck editor embedded in firefox",
   "id": "html-editor",
-  "description": "a basic html editor",
+  "description": "Embedded version of CKEditor to be able to edit HTML files locally",
   "author": "punky",
   "license": "MPL 2.0",
-  "version": "0.1",
-  "preferences" :
-    [
-        {"name": "editorName",
-        "type": "radio",
-        "title": "editor to use",
-        "value": "ckeditor",
-        "options": [
-            {
-                "value": "tinymce",
-                "label": "tinyMCE"
-            },
-            {
-                "value": "raptor",
-                "label": "raptor"
-            },
-            {
-                "value": "ckeditor",
-                "label": "CKEditor"
-            }
-        ]
-    }]
+  "version": "0.1"
 }
