@@ -19,6 +19,10 @@ function editorPrefToPageName(value)
     {
         return data.url("editor-tinymce.html");
     }
+    else if(value == "ckeditor")
+    {
+        return data.url("editor-ckeditor.html");
+    }
 }
 
 function onEditorPrefChange(prefName) {

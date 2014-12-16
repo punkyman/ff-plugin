@@ -5,7 +5,7 @@ tinymce.init({
                 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars code fullscreen",
                 "insertdatetime media nonbreaking save table contextmenu directionality",
-                "emoticons template paste textcolor colorpicker textpattern",
+                "emoticons template paste textcolor colorpicker textpattern embedimage",
 	        "save"
             ],
             save_enablewhendirty: true,
