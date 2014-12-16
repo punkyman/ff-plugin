@@ -9,13 +9,23 @@
         <script type="text/javascript">
         CKEDITOR.config.extraPlugins = "base64image,createSave";
         CKEDITOR.replace( 'content' );
+
+        // start editor as maximized in window
+        CKEDITOR.on('instanceReady',
+            function( evt )
+            {
+                var editor = evt.editor;
+                editor.execCommand('maximize');
+            }
+        );
+      
         window.onload = function() {
         var textArea = document.getElementById("content");
         textArea.addEventListener('load-content', function onloadcontent(event) {
-                CKEDITOR.instances.content.setData(event.detail);
+            CKEDITOR.instances.content.setData(event.detail);
             }, false);
             
-            CKEDITOR.instances.content.on( 'change', function( evt ) {
+            CKEDITOR.instances.content.on( 'save', function( evt ) {
                 var event = new CustomEvent('save-content', { 'detail': evt.editor.getData() });
                 var textArea = document.getElementById("content");
                 textArea.dispatchEvent(event);

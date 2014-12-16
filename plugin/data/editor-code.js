@@ -11,7 +11,6 @@ function loadFileContent(fileContent)
     var event = new CustomEvent('load-content', { 'detail': fileContent });
     var textArea = document.getElementById("content");
     textArea.dispatchEvent(event);
-    console.log(fileContent);
 }
 
 // listeners for plugin events
